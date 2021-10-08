@@ -1,11 +1,20 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Shop`,
+    description: `Shop with us powered by Shopify / and teeLaunch for on demand products`,
+    author: `James Sinkler`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        password: process.env.GATSBY_SHOPIFY_PASS,
+        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
