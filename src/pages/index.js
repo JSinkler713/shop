@@ -1,9 +1,10 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import './index.css'
 
 const IndexPage = ({data}) => (
   <Layout>
@@ -13,11 +14,10 @@ const IndexPage = ({data}) => (
     <ul>
       {data.allShopifyProduct.edges.map(({ node }) => (
         <li key={node.shopifyId}>
-          <h3>
-            <Link to={`/products/${node.handle}`}>{node.title}</Link>
-            {" - "}${node.priceRangeV2.minVariantPrice.amount}
-          </h3>
-          <p>{node.description}</p>
+          <Link to={`products/${node.handle}`}>
+      <GatsbyImage className='main-image' image={getImage(node.featuredImage)} alt={node.title}/>
+          <p>{node.title} - {node.priceRangeV2.minVariantPrice.amount} </p>
+          </Link>
         </li>
       ))}
     </ul>
@@ -32,6 +32,10 @@ export const query = graphql`
     allShopifyProduct(sort: { fields: [title] }) {
       edges {
         node {
+          featuredImage {
+            id
+            gatsbyImageData(width: 200)
+          }
           title
           shopifyId
           description

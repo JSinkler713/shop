@@ -1,0 +1,10 @@
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  min-height: fit;
+}
+li {
+}
+.main-image {
+}
