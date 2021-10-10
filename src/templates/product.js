@@ -2,6 +2,7 @@ import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { AddToCart } from "../components/addToCart"
 import { StoreContext } from "../context/store-context"
+import './product.css'
 
 
 import Layout from "../components/layout"
@@ -9,19 +10,35 @@ import Layout from "../components/layout"
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
   const { client } = React.useContext(StoreContext)
-  console.log('***********************')
-  // currently just displaying first variant
-  console.log(product.variants[0])
-  console.log('***********************')
-  console.log('image', product.featuredImage)
+  const [variantId, setVariantId] = React.useState(product.variants[0].shopifyId)
+  const [variantIndex, setVariantIndex] = React.useState(0)
+
+  const mainImageRef = React.useRef()
+
+  function setVariant(id, i, e) {
+    setVariantIndex(i)
+    setVariantId(id)
+    // update main image to selected image
+  }
+
+  const images = product.variants.map((variant, i)=> {
+    return (
+      <div className={(i === variantIndex) ? 'active img-wrapper' : 'img-wrapper'}>
+      <GatsbyImage id={`variant-${i}`}  onClick={(e)=>setVariant(variant.shopifyId,i, e)} key={`variant-${i}`} image={getImage(variant.image)} alt={product.title}/>
+      </div>
+    )
+  })
   return (
     <Layout>
-      <h1>{product.title}</h1>
+      <h1>{product.title} - ${(+product.priceRangeV2.maxVariantPrice.amount).toFixed(2)}</h1>
+      <div className='images-container'>
+      <GatsbyImage ref={mainImageRef} className='main-image' image={getImage(product.featuredImage)} alt={product.title}/>
       <div>{product.description}</div>
-      <div>
-      {<GatsbyImage image={getImage(product.featuredImage)} alt={product.title}/>}
+        <div className='variant-container'>
+        {images}
+        </div>
       <AddToCart
-        variantId={product.variants[0].shopifyId}
+        variantId={variantId}
         quantity={1}
         available={true}
       />
