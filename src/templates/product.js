@@ -9,22 +9,20 @@ import Layout from "../components/layout"
 
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
-  const { client } = React.useContext(StoreContext)
   const [variantId, setVariantId] = React.useState(product.variants[0].shopifyId)
   const [variantIndex, setVariantIndex] = React.useState(0)
 
   const mainImageRef = React.useRef()
 
-  function setVariant(id, i, e) {
+  function setVariant(id, i) {
     setVariantIndex(i)
     setVariantId(id)
-    // update main image to selected image
   }
 
   const images = product.variants.map((variant, i)=> {
     return (
       <div className={(i === variantIndex) ? 'active img-wrapper' : 'img-wrapper'}>
-      <GatsbyImage id={`variant-${i}`}  onClick={(e)=>setVariant(variant.shopifyId,i, e)} key={`variant-${i}`} image={getImage(variant.image)} alt={product.title}/>
+      <GatsbyImage id={`variant-${i}`}  onClick={()=>setVariant(variant.shopifyId, i)} key={`variant-${i}`} image={getImage(variant.image)} alt={product.title}/>
       </div>
     )
   })
