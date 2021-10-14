@@ -25,6 +25,7 @@ module.exports = {
         display: 'swap'
       }
     },
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
