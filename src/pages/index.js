@@ -9,8 +9,11 @@ import './index.css'
 const IndexPage = ({data}) => (
   <Layout>
     <Seo title="Home" />
-    <h1>Hi people</h1>
-        <h1>Products</h1>
+    <h2 style={{marginTop: '30px'}}>DoodleBug</h2>
+      <p>DoodleBug is a site all about doodles come to life. Most doodles end up where they started, on the side of a todo list, on a magazine article you are reading, etc. DoodleBug is all about putting those doodles on things you can savor beyond the joy of the doodeling itself. Please enjoy our products, and if you like them think about buying a friend one as well.</p>
+      <p>Thanks!</p>
+      <p>- The Doodle Team</p>
+    <h1>Products</h1>
     <ul>
       {data.allShopifyProduct.edges.map(({ node }) => (
         <li key={node.shopifyId}>
