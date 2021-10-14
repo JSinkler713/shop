@@ -82,9 +82,12 @@ export const StoreProvider = ({ children }) => {
       },
     ]
 
+    console.log('line items to update', lineItemsToUpdate)
+
     return client.checkout
       .addLineItems(checkoutID, lineItemsToUpdate)
       .then((res) => {
+        console.log(res)
         setCheckout(res)
         setLoading(false)
         setDidJustAddToCart(true)
