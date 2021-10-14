@@ -1,7 +1,7 @@
 import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { AddToCart } from "../components/addToCart"
-import { StoreContext } from "../context/store-context"
+// import { StoreContext } from "../context/store-context"
 import './product.css'
 
 
@@ -12,7 +12,7 @@ const ProductTemplate = ({ pageContext }) => {
   const [variantId, setVariantId] = React.useState(product.variants[0].shopifyId)
   const [variantIndex, setVariantIndex] = React.useState(0)
 
-  const mainImageRef = React.useRef()
+  //const mainImageRef = React.useRef()
 
   function setVariant(id, i) {
     setVariantIndex(i)
@@ -26,11 +26,28 @@ const ProductTemplate = ({ pageContext }) => {
       </div>
     )
   })
+
+  // if there are alternateImages
+  const alternateImages = product.images ? (product.images.map((img, i)=> {
+    return (
+      <div className='little-wrapper'>
+      <GatsbyImage id={`variant-${i}`}  onClick={()=>console.log('hey')} key={`variant-${i}`} image={getImage(img)} alt={product.title + `${i}`}/>
+      </div>
+    )
+  })) : null
+
+
+
   return (
     <Layout>
       <h1>{product.title} - ${(+product.priceRangeV2.maxVariantPrice.amount).toFixed(2)}</h1>
       <div className='images-container'>
-      <GatsbyImage ref={mainImageRef} className='main-image' image={getImage(product.featuredImage)} alt={product.title}/>
+        <div className='main-image-side-gallery'>
+          <GatsbyImage  className='main-image' image={getImage(product.featuredImage)} alt={product.title}/>
+          <div className='side-gallery'>
+            {alternateImages}
+          </div>
+        </div>
       <div>{product.description}</div>
         <div className='variant-container'>
         {images}
