@@ -1,10 +1,14 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import './index.css'
+import styled from 'styled-components'
+
+const TitleEl = styled.p`
+  text-transform: capitalize;
+`
 
 const IndexPage = ({data}) => (
   <Layout>
@@ -19,7 +23,7 @@ const IndexPage = ({data}) => (
         <li key={node.shopifyId}>
           <Link to={`products/${node.handle}`}>
       <GatsbyImage className='main-image' image={getImage(node.featuredImage)} alt={node.title}/>
-          <p>{node.title} - {node.priceRangeV2.minVariantPrice.amount} </p>
+          <TitleEl>{node.title} - {(+node.priceRangeV2.minVariantPrice.amount).toFixed(2)}</TitleEl>
           </Link>
         </li>
       ))}

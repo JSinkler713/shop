@@ -3,9 +3,15 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { AddToCart } from "../components/addToCart"
 // import { StoreContext } from "../context/store-context"
 import './product.css'
-
-
+import styled from 'styled-components'
 import Layout from "../components/layout"
+
+
+
+const ProductTitle = styled.h1`
+  margin-top: 32px;
+  color: orange;
+`
 
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
@@ -40,7 +46,7 @@ const ProductTemplate = ({ pageContext }) => {
 
   return (
     <Layout>
-      <h1>{product.title} - ${(+product.priceRangeV2.maxVariantPrice.amount).toFixed(2)}</h1>
+      <ProductTitle>{product.title} - ${(+product.priceRangeV2.maxVariantPrice.amount).toFixed(2)}</ProductTitle>
       <div className='images-container'>
         <div className='main-image-side-gallery'>
           <GatsbyImage  className='main-image' image={getImage(product.featuredImage)} alt={product.title}/>

@@ -4,7 +4,14 @@ ul {
   justify-content: space-between;
   min-height: fit;
 }
-li {
+ul li {
+  text-align: center;
+}
+a:visited {
+  color: black;
+}
+a {
+  color: black;
 }
 .main-image {
 }
