@@ -7,6 +7,11 @@ const HeaderComponent = styled.header`
   padding: 20px;
   background-color: black;
 `
+const HeaderWrapper = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
 const LinkElement = styled(Link)`
   color: white;
   :visited {
@@ -20,12 +25,15 @@ const LinkElement = styled(Link)`
 const TitleElement = styled.h1`
   margin: 0;
 `
+const CartElement = styled(Link)`
+  color: white;
+
+`
 
 const Header = ({ siteTitle }) => (
   <HeaderComponent
   >
-    <div
-    >
+    <HeaderWrapper>
       <TitleElement>
         <LinkElement
           to="/"
@@ -33,7 +41,14 @@ const Header = ({ siteTitle }) => (
           DoodleBug
         </LinkElement>
       </TitleElement>
-    </div>
+      <LinkElement
+        to='/cart'
+      >
+        <CartElement>
+          Cart
+        </CartElement>
+      </LinkElement>
+    </HeaderWrapper>
   </HeaderComponent>
 )
 
