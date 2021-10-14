@@ -18,6 +18,9 @@ exports.createPages = async ({ graphql, actions }) => {
             featuredImage {
 								gatsbyImageData(width: 200)
             }
+            images {
+								gatsbyImageData(width: 100)
+            }
             variants {
               shopifyId
               image {
